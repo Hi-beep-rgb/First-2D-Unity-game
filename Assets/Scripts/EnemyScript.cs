@@ -4,11 +4,11 @@ public class EnemyScript : MonoBehaviour
 {
     //Declare this variablle at the top of this script
     Rigidbody2D rb;
-    bool isGrounded;
     public Animator anim;
     SpriteRenderer sr;
     LayerMask groundLayerMask;
     float xvel;
+    BoxCollider2D bc;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
 
@@ -24,8 +24,6 @@ public class EnemyScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
-
         if (xvel >= 0.1f || xvel <= -0.1f)
         {
             anim.SetBool("isWalking", true);
@@ -95,8 +93,5 @@ public class EnemyScript : MonoBehaviour
         Debug.DrawRay(transform.position + offset, -Vector3.up * rayLength, hitColor);
 
         return hitSomething;
-
     }
-
-
 }

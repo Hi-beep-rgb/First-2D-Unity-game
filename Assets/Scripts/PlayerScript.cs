@@ -9,19 +9,28 @@ public class PlayerScript : MonoBehaviour
     Rigidbody2D rb;
     bool isGrounded;
     public Animator anim;
-    SpriteRenderer sr;
     LayerMask groundLayerMask;
+    public int lives;
+    public bool write;
+    public bool flip;
+
+    HelperScript helper;
 
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-        sr = GetComponent<SpriteRenderer>();
         groundLayerMask = LayerMask.GetMask("Ground");
+        lives = 3;
+
+        //Adds the helper script and stores a refrence in it
+        helper = gameObject.AddComponent<HelperScript>();
     }
 
     // Update is called once per frame
     void Update()
     {
+
+        //Code for my players movment
         float xvel, yvel;
 
         xvel = rb.linearVelocity.x;
@@ -30,14 +39,19 @@ public class PlayerScript : MonoBehaviour
         if (Input.GetKey("a"))
         {
             xvel = -3;
-            /* sr.flipX = true; */
+             /*sr.flipX = true;*/
         }
 
         if (Input.GetKey("d"))
         {
             xvel = 3;
-            /* sr.flipX = false; */
+             /*sr.flipX = false;*/
         }
+
+        /*if (Input.GetKey("w") && isGrounded)
+        {
+            yvel = 5;
+        }*/
 
         if (Input.GetKey(KeyCode.Space) && isGrounded)
         {
@@ -55,7 +69,7 @@ public class PlayerScript : MonoBehaviour
             anim.SetBool("isWalking", false);
         }
 
-        if (xvel >= 0.1f)
+        /*if (xvel >= 0.1f)
         {
             sr.flipX = false;
         }
@@ -63,7 +77,7 @@ public class PlayerScript : MonoBehaviour
         if (xvel <= -0.1f)
         {
             sr.flipX = true;
-        }
+        }*/
 
         //do ground check
 
@@ -75,12 +89,24 @@ public class PlayerScript : MonoBehaviour
         {
             isGrounded = false;
         }
+
+        //flip sprite
+        if( xvel < 0 )
+        {
+            helper.DoFlipObject(true);
+        }
+        if (xvel > 0)
+        {
+            helper.DoFlipObject(false);
+        }
+
+
     }
 
-    private void OnCollisionEnter2D(Collision2D other)
+    /*private void OnCollisionEnter2D(Collision2D other)
     {
         print("Player has collided with " +  other.gameObject.name);
-    }
+    }*/
 
     /*
     private void OnCollisionStay2D(Collision2D collision)
@@ -118,37 +144,4 @@ public class PlayerScript : MonoBehaviour
         Debug.DrawRay(transform.position, Vector2.down * rayLength, hitColor);
         return hit.collider;
     }
-
-
-    /*
-    float xpos = transform.position.x;
-    float ypos = transform.position.y;
-
-    if (Input.GetKeyDown("w"))
-    {
-        ypos = ypos + 0.1f;
-    }
-
-    if (Input.GetKeyDown("a"))
-    {
-        xpos = xpos - 0.1f;
-
-    }
-
-    if (Input.GetKeyDown("s"))
-    {
-        ypos = ypos - 0.1f;
-
-    }
-
-    if (Input.GetKeyDown("d"))
-    {
-        xpos = xpos + 0.1f;
-    }
-
-    //limit the x/y position
-
-
-    transform.position = new Vector3(xpos, ypos, 0);
-    */
 }

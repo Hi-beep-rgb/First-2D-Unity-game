@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class EnemyScript : MonoBehaviour
+public class DarkSamuraiScript : MonoBehaviour
 {
     //Declare these variablle at the top of this script
     Rigidbody2D rb;
@@ -8,23 +8,23 @@ public class EnemyScript : MonoBehaviour
     SpriteRenderer sr;
     LayerMask groundLayerMask;
     float xvel;
+    float yvel;
     public PlayerScript playerScript;
-    BoxCollider2D bc;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
-
-
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         sr = GetComponent<SpriteRenderer>();
         groundLayerMask = LayerMask.GetMask("Ground");
-        xvel = 1;
+        xvel = 3.5f;
+        yvel = 5.5f;
     }
 
     // Update is called once per frame
     void Update()
     {
+
         if (xvel >= 0.1f || xvel <= -0.1f)
         {
             anim.SetBool("isWalking", true);

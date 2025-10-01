@@ -16,7 +16,7 @@ public class CollectableScript : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        print("Collectable has collided with " + other.gameObject.tag);
+        /*print("Collectable has collided with " + other.gameObject.tag);*/
 
         if (other.gameObject.tag == "Player")
         {

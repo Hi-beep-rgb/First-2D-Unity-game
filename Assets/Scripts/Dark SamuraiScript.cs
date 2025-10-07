@@ -45,7 +45,7 @@ public class DarkSamuraiScript : MonoBehaviour
         }
 
 
-        rb.linearVelocity = new Vector3(xvel, rb.linearVelocity.y, 0);
+        rb.linearVelocity = new Vector3(xvel, yvel, 0);
 
 
         //check for reaching the edge of a platform

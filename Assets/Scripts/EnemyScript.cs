@@ -19,7 +19,7 @@ public class EnemyScript : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         sr = GetComponent<SpriteRenderer>();
         groundLayerMask = LayerMask.GetMask("Ground");
-        xvel = 1;
+        xvel = 1.5f;
     }
 
     // Update is called once per frame
